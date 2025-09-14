@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'jaisalmerhub.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jsm_db',
-        'USER': 'jaisalmer_user',
-        'PASSWORD': 'Brizzyadav@1998',
+        'NAME': 'jaisalmerbook_db',
+        'USER': 'django_user'@'localhost',
+        'PASSWORD': 'brizz1998',
         'HOST': 'localhost',
         'PORT': '3306',
     }
