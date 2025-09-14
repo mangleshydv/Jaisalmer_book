@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Pending - {{ hotel.Hotel_Name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf8f3;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: #fffdf9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border: 2px solid #d4af37; /* golden border */
+        }
+        .header {
+            background: linear-gradient(135deg, #6b4c2a, #3b2d1f);
+            color: #f9e8c9;
+            text-align: center;
+            padding: 35px 20px;
+            position: relative;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #d4af37;
+            border-radius: 2px;
+        }
+        .content {
+            padding: 35px 30px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .content p {
+            margin: 15px 0;
+        }
+        .details {
+            margin: 30px 0;
+            background: #fff9ef;
+            padding: 20px;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+        }
+        .details h3 {
+            margin-top: 0;
+            color: #6b4c2a;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .details ul {
+            padding: 0;
+            list-style: none;
+            margin: 15px 0 0 0;
+        }
+        .details li {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        .details strong {
+            color: #3b2d1f;
+        }
+        .status-note {
+            background: #fff4e1;
+            padding: 15px;
+            border: 1px dashed #d4af37;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #5c4a32;
+        }
+        .hotel-info {
+            margin-top: 25px;
+            font-size: 15px;
+            color: #444;
+        }
+        .hotel-info a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+        .footer {
+            text-align: center;
+            font-size: 13px;
+            color: #6b5e4b;
+            padding: 20px;
+            background-color: #faf4eb;
+            border-top: 1px solid #eee3d3;
+        }
+        @media screen and (max-width: 600px) {
+            .content, .details {
+                padding: 20px 15px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>Booking Pending</h1>
+        </div>
+
+        <div class="content">
+            <p>Dear {{ booking.full_name }},</p>
+
+            <p>Thank you for your booking at <strong>{{ hotel.Hotel_Name }}</strong>.</p>
+
+            <div class="status-note">
+                <strong>Important:</strong> Your booking (ID: <strong>{{ booking.booking_id }}</strong>) is currently being processed.  
+                It is not yet confirmed. You will receive a confirmation email once approved.
+            </div>
+
+            <div class="details">
+                <h3>Booking Details</h3>
+                <ul>
+                    <li><strong>Check-in:</strong> {{ booking.check_in_date }}</li>
+                    <li><strong>Check-out:</strong> {{ booking.check_out_date }}</li>
+                    <li><strong>Room Quantity:</strong> {{ booking.room_quantity }}</li>
+                    <li><strong>Total Price:</strong> ₹{{ booking.total_price }}</li>
+                </ul>
+            </div>
+
+            <p>If you have any questions, please contact us:</p>
+
+            <div class="hotel-info">
+                Email: <a href="mailto:{{ hotel.contact_email }}">{{ hotel.contact_email }}</a><br>
+                Phone: {{ hotel.contact_phone }}
+            </div>
+
+            <p>We appreciate your patience and look forward to hosting you soon.</p>
+
+            <p>Warm regards,<br>
+            <strong>{{ hotel.Hotel_Name }} Team</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>© {% now "Y" %} {{ hotel.Hotel_Name }}. All rights reserved.</p>
+        </div>
+
+    </div>
+</body>
+</html>

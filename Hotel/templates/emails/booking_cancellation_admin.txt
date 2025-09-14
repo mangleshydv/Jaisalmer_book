@@ -1,0 +1,18 @@
+Booking Cancellation Notification
+
+A booking has been cancelled:
+
+Guest: {{ booking.full_name }}
+Email: {{ booking.email }}
+Phone: {{ booking.phone }}
+
+Booking Details:
+- Booking ID: {{ booking.booking_id }}
+- Hotel: {{ hotel.Hotel_Name }}
+- Original Dates: {{ booking.check_in_date }} to {{ booking.check_out_date }}
+- Room Quantity: {{ booking.room_quantity }}
+- Total Amount: ₹{{ booking.total_price }}
+
+Cancellation Time: {% now "DATETIME_FORMAT" %}
+
+Please update your records accordingly.

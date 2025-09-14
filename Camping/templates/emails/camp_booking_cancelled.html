@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Cancelled - {{ booking.booking_id }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f8f9fb;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border: 1px solid #e3e3e3;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #E53935, #EF5350);
+            color: #fff;
+            padding: 30px 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .header div {
+            margin-top: 8px;
+            font-size: 16px;
+            color: #f0f0f0;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 4px;
+            background: #ffcdd2;
+            border-radius: 3px;
+        }
+
+        .content {
+            padding: 30px 25px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #b71c1c;
+            margin-bottom: 10px;
+            border-left: 5px solid #ffcdd2;
+            padding-left: 10px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #ffebee;
+            color: #333;
+            font-weight: 600;
+            width: 35%;
+        }
+
+        td {
+            background: #fff;
+        }
+
+        table tr:last-child th, table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .footer {
+            font-size: 13px;
+            margin-top: 25px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            color: #555;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            table th {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Booking Cancelled</h1>
+            <div>We're sorry to see you go</div>
+        </div>
+
+        <div class="content">
+            <p>Dear <strong>{{ booking.full_name }}</strong>,</p>
+            <p>Your booking at <strong>{{ camp.Name }}</strong> has been successfully cancelled.</p>
+
+            <h2>Booking Summary</h2>
+            <table>
+                <tr>
+                    <th>Booking ID</th>
+                    <td>{{ booking.booking_id }}</td>
+                </tr>
+                <tr>
+                    <th>Check-in</th>
+                    <td>{{ booking.check_in_date }}</td>
+                </tr>
+                <tr>
+                    <th>Check-out</th>
+                    <td>{{ booking.check_out_date }}</td>
+                </tr>
+                <tr>
+                    <th>Number of tents</th>
+                    <td>{{ booking.quantity }}</td>
+                </tr>
+                <tr>
+                    <th>Refund Amount</th>
+                    <td>₹{{ refund_amount|default:"0" }}</td>
+                </tr>
+                {% if refund_policy %}
+                <tr>
+                    <th>Refund Policy</th>
+                    <td>{{ refund_policy }}</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <p style="margin-top:20px;">
+                Your refund will be processed within 5–7 business days to your original payment method.  
+                If you’d like to rebook, feel free to contact us.
+            </p>
+
+            <div class="footer">
+                Best regards,<br>
+                <strong>{{ site_name }} Team</strong><br>
+                © {% now "Y" %} {{ site_name }}. All rights reserved.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

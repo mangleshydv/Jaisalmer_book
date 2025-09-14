@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Booking is Pending</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            color: #4a4a4a;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .booking-card {
+            background: #f9fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .booking-detail {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            width: 120px;
+            color: #667eea;
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .services-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+        
+        .services-list li {
+            background: #e6e9f2;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f1f3f8;
+            color: #7a7a7a;
+            font-size: 14px;
+        }
+        
+        .action-button {
+            display: inline-block;
+            background: #667eea;
+            color: white !important;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            margin: 20px 0;
+        }
+        
+        .divider {
+            height: 1px;
+            background: #e0e6ed;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <img src="https://example.com/logo.png" alt="Company Logo" class="logo">
+            <h1>Your Booking is Pending</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ booking.full_name }},</p>
+            <p>Thank you for booking <strong>{{ activity.Name }}</strong>! Your booking is currently being processed and will be confirmed shortly.</p>
+            
+            <div class="booking-card">
+                <div class="booking-detail">
+                    <span class="detail-label">Booking ID:</span>
+                    <span class="detail-value">{{ booking.booking_id }}</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Activity:</span>
+                    <span class="detail-value">{{ activity.Name }}</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value">{{ booking.booking_date }}</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Participants:</span>
+                    <span class="detail-value">{{ booking.quantity }}</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Total Price:</span>
+                    <span class="detail-value">₹{{ booking.total_price }}</span>
+                </div>
+                
+                {% if booking.get_services %}
+                <div class="booking-detail">
+                    <span class="detail-label">Services:</span>
+                    <div class="detail-value">
+                        <ul class="services-list">
+                            {% for service in booking.get_services %}
+                            <li>{{ service }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <p>We're reviewing your booking details and will send you a confirmation email within 24 hours.</p>
+            
+            <div class="divider"></div>
+            
+            <p>Need help or have questions about your booking?</p>
+            <a href="mailto:{{ booking.admin_email }}" class="action-button">Contact Our Team</a>
+        </div>
+        
+        <div class="footer">
+            <p>© {% now "Y" %} {{ activity.Name }}. All rights reserved.</p>
+            <p>{{ booking.admin_contact_number }} | {{ booking.admin_email }}</p>
+        </div>
+    </div>
+</body>
+</html>

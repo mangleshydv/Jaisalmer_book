@@ -1,0 +1,24 @@
+Subject: Booking Cancellation - {{ camp.Name }}
+
+Dear {{ booking.full_name }},
+
+We're sorry to see you go! Your booking has been cancelled as requested.
+
+Booking Details:
+- Booking ID: {{ booking.booking_id }}
+- Camp: {{ camp.Name }}
+- Original Dates: {{ booking.check_in_date }} to {{ booking.check_out_date }}
+- Number of Tents: {{ booking.quantity }}
+- Total Refund: ₹{{ refund_amount|default:"0" }}
+
+{% if refund_policy %}
+Refund Policy:
+{{ refund_policy }}
+{% endif %}
+
+If this was a mistake or you'd like to rebook, please contact us at {{ contact_number }} or reply to this email.
+
+We hope to see you again in the future!
+
+Best regards,
+{{ site_name }} Team

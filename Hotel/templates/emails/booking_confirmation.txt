@@ -1,0 +1,17 @@
+Dear {{ booking.full_name }},
+
+Thank you for your booking at {{ hotel.Hotel_Name }}!
+
+Booking Details:
+- Booking ID: {{ booking.booking_id }}
+- Check-in: {{ booking.check_in_date }}
+- Check-out: {{ booking.check_out_date }}
+- Room Quantity: {{ booking.room_quantity }}
+- Total Price: ₹{{ booking.total_price }}
+
+Please find your booking confirmation attached as a PDF.
+
+We look forward to welcoming you!
+
+Best regards,
+{{ hotel.Hotel_Name }} Team

@@ -1,0 +1,16 @@
+Dear {{ booking.full_name }},
+
+We regret to inform you that your booking at {{ hotel.Hotel_Name }} has been cancelled.
+
+Cancelled Booking Details:
+- Booking ID: {{ booking.booking_id }}
+- Check-in: {{ booking.check_in_date }}
+- Check-out: {{ booking.check_out_date }}
+- Room Quantity: {{ booking.room_quantity }}
+
+If this cancellation was unexpected or if you have any questions, please contact us at {{ hotel.contact_email }} or {{ hotel.contact_phone }}.
+
+We hope to serve you again in the future.
+
+Best regards,
+{{ hotel.Hotel_Name }} Team

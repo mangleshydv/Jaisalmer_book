@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Your desert camp booking with Flyvoo is pending. Our team will confirm your camp stay near Sam Sand Dunes, Jaisalmer, and share the details soon.">
+  <meta name="keywords" content="camp booking pending Jaisalmer, Flyvoo camp booking status, desert camp reservation pending, Sam Sand Dunes camp booking">
+  <title>Booking Pending - {{ booking.camp.Name }}</title>
+
+  <!-- Bootstrap & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --gold:#8c6239;
+      --gold-soft:#c19a6b;
+      --gold-dark:#6e4b2a;
+      --paper:#fdfcf9;
+      --ink:#333;
+    }
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--paper);
+      color:var(--ink);
+    }
+    .heritage-header{
+      background:linear-gradient(to right,var(--gold),var(--gold-soft));
+      color:#fff;
+      text-align:center;
+      padding:2rem 1rem;
+      border-bottom:5px solid var(--gold-dark);
+    }
+    .heritage-header h1{
+      font-family:'Playfair Display',serif;
+      font-size:2.4rem;
+      margin:0 0 .25rem;
+    }
+    .heritage-sub{
+      opacity:.95;
+      letter-spacing:.2px;
+    }
+    .heritage-card{
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 6px 22px rgba(0,0,0,.08);
+      padding:2rem;
+      margin-top:-3rem;
+      position:relative;
+      z-index:10;
+    }
+    .heritage-title{
+      font-family:'Playfair Display',serif;
+      color:var(--gold-dark);
+      margin-bottom:.75rem;
+    }
+    .detail-item{
+      margin-bottom:.6rem;
+      font-size:1.02rem;
+    }
+    .detail-item strong{ color:var(--gold); }
+
+    /* Progress line (Pending → Confirmed → Checked-in) */
+    .progress-soft{
+      display:flex;align-items:center;justify-content:center;gap:14px;margin:.25rem 0 1.25rem;
+    }
+    .dot{width:10px;height:10px;border-radius:50%;background:#e7d7c3;}
+    .dot.active{background:var(--gold);}
+    .bar{height:2px;width:60px;background:#e7d7c3;}
+    .bar.active{background:var(--gold);}
+
+    /* Two-column info grid (no images) */
+    .info-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1rem;
+      margin-top:1rem;
+    }
+    .info-box{
+      background:#fff7ef;
+      border:1px solid #f0e1cf;
+      border-radius:14px;
+      padding:1rem 1.1rem;
+    }
+    .info-box h6{
+      margin:0 0 .35rem;
+      color:var(--gold-dark);
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+    .badge-heritage{
+      background:var(--gold);
+      color:#fff;
+      border-radius:30px;
+      padding:.4rem .8rem;
+      font-weight:500;
+      font-size:.9rem;
+    }
+    .btn-heritage{
+      background:var(--gold);
+      color:#fff;
+      border-radius:30px;
+      padding:.6rem 1.5rem;
+      font-weight:500;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .btn-heritage:hover{ background:var(--gold-dark); color:#fff; }
+
+    footer{
+      background:#f4f1ec;
+      padding:2rem 1rem;
+      margin-top:3rem;
+      text-align:center;
+      font-size:.95rem;
+      color:#555;
+    }
+    footer a{ color:var(--gold); text-decoration:none; margin:0 10px; }
+    footer a:hover{ text-decoration:underline; }
+
+    @media (max-width: 768px){
+      .info-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="heritage-header">
+    <h1>Booking Pending</h1>
+    <p class="heritage-sub">Your desert camp experience at <strong>{{ booking.camp.Name }}</strong> awaits</p>
+  </header>
+
+  <main class="container">
+    <section class="heritage-card text-center">
+      <h2 class="heritage-title">Thank You, {{ booking.full_name }}!</h2>
+      <p class="mb-3">We’ve received your request. Our reservations team will contact you shortly to confirm the details.</p>
+
+      <!-- Progress (Pending is active) -->
+      <div class="progress-soft" aria-label="Booking progress">
+        <span class="dot active"></span><span class="bar"></span>
+        <span class="dot"></span><span class="bar"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="d-flex justify-content-center gap-4 mb-3 small text-muted">
+        <span>Pending</span><span>Confirmed</span><span>Checked-in</span>
+      </div>
+
+      <!-- Booking essentials -->
+      <div class="row justify-content-center g-3">
+        <div class="col-12 col-md-10">
+          <div class="detail-item"><strong>Booking ID:</strong> {{ booking.booking_id }}</div>
+          <div class="detail-item"><strong>Camp:</strong> {{ booking.camp.Name }}</div>
+          <div class="detail-item"><strong>Status:</strong> {{ booking.get_status_display }}</div>
+          <div class="detail-item"><strong>Total Price:</strong> ₹{{ booking.total_price }}</div>
+        </div>
+      </div>
+
+      <!-- Camp & Stay info (no images) -->
+      <div class="info-grid mt-3 text-start">
+        <div class="info-box">
+          <h6>Camp Details</h6>
+          <div><strong>Address:</strong> {{ booking.camp.Address }}</div>
+          <div><strong>Rating:</strong> {{ booking.camp.Rating }}/5</div>
+          <div><strong>Features:</strong> {{ booking.camp.Features }}</div>
+        </div>
+        <div class="info-box">
+          <h6>Stay & Pricing</h6>
+          <div><strong>Stay:</strong> {{ booking.camp.Days }} Days / {{ booking.camp.Night }} Nights</div>
+          <div><strong>Capacity:</strong> {{ booking.camp.Single_Camp_People }} People</div>
+          <div>
+            <strong>Price:</strong>
+            {% if booking.camp.Fake_Price %}
+              <del>₹{{ booking.camp.Fake_Price }}</del>
+            {% endif %}
+            <span class="ms-1">₹{{ booking.camp.Real_Price }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selected services (shown only if any selected) -->
+      {% if booking.pickup_home or booking.pickup_hotel or booking.pickup_railway or booking.pickup_airport %}
+      <div class="mt-4">
+        <span class="badge-heritage me-2">Extras Added</span>
+        <div class="mt-2 small text-muted">
+          {% if booking.pickup_home %}<span class="me-3">Home Pickup</span>{% endif %}
+          {% if booking.pickup_hotel %}<span class="me-3">Hotel Pickup</span>{% endif %}
+          {% if booking.pickup_railway %}<span class="me-3">Railway Station Pickup</span>{% endif %}
+          {% if booking.pickup_airport %}<span class="me-3">Airport Pickup</span>{% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CTA -->
+      <div class="mt-4">
+        <a href="{% url 'home' %}" class="btn-heritage">Back to Home</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; {{ booking.camp.Name }} | All Rights Reserved</p>
+    <p>
+      <a href="">Privacy Policy</a> |
+      <a href="">Terms &amp; Conditions</a> |
+      <a href="">Contact Us</a>
+    </p>
+    <p>Need help? Call <strong>{{ booking.admin_contact_number }}</strong> or email <strong>{{ booking.admin_email }}</strong></p>
+  </footer>
+
+</body>
+</html>

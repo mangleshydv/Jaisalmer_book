@@ -1,0 +1,15 @@
+Dear {{ booking.full_name }},
+
+We're sorry to see you go! Your booking at {{ hotel.Hotel_Name }} has been cancelled.
+
+Booking Details:
+- Booking ID: {{ booking.booking_id }}
+- Original Check-in: {{ booking.check_in_date }}
+- Original Check-out: {{ booking.check_out_date }}
+
+If this was a mistake or you'd like to rebook, please contact us.
+
+We hope to see you again in the future!
+
+Best regards,
+{{ hotel.Hotel_Name }} Team

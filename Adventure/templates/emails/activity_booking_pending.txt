@@ -1,0 +1,28 @@
+Your Booking is Pending
+=======================
+
+Dear {{ booking.full_name }},
+
+Thank you for booking {{ activity.Name }}! Your booking is currently being processed and will be confirmed shortly.
+
+Booking Details:
+---------------
+Booking ID: {{ booking.booking_id }}
+Activity: {{ activity.Name }}
+Date: {{ booking.booking_date }}
+Participants: {{ booking.quantity }}
+Total Price: ₹{{ booking.total_price }}
+
+{% if booking.get_services %}
+Services:
+{% for service in booking.get_services %}
+- {{ service }}
+{% endfor %}
+{% endif %}
+
+We're reviewing your booking details and will send you a confirmation email within 24 hours.
+
+Need help or have questions about your booking?
+Contact our team at {{ booking.admin_email }} or call us at {{ booking.admin_contact_number }}
+
+© {% now "Y" %} {{ activity.Name }}. All rights reserved.

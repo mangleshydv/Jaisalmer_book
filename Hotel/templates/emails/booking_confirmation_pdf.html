@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmation - {{ hotel.Hotel_Name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            background: rgba(255, 253, 249, 0.9);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #d4af37;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0c2340, #1e3a5f);
+            color: #f9e8c9;
+            padding: 30px 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header div {
+            margin-top: 6px;
+            font-size: 16px;
+            color: #f3e8c9;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 4px;
+            background: #d4af37;
+            border-radius: 3px;
+        }
+
+        .content {
+            padding: 30px 25px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #0c2340;
+            margin: 25px 0 10px;
+            border-left: 5px solid #d4af37;
+            padding-left: 10px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            width: 35%;
+            background-color: #f9f6ef;
+            color: #3c3c3c;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        table tr:last-child th,
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .map-link {
+            color: #0c2340;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer {
+            font-size: 13px;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            color: #444;
+        }
+
+        .tc-title {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+            font-size: 15px;
+        }
+
+        ul.tc {
+            margin: 8px 0 0 18px;
+            padding: 0;
+        }
+
+        ul.tc li {
+            margin-bottom: 6px;
+        }
+
+        .signature {
+            margin-top: 25px;
+            font-style: italic;
+            color: #333;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            table th {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Booking Confirmation</h1>
+            <div>Thank you for choosing {{ hotel.Hotel_Name }}</div>
+        </div>
+
+        <div class="content">
+            <h2>Guest & Booking Details</h2>
+            <table>
+                <tr>
+                    <th>Booking ID</th>
+                    <td>{{ booking.booking_id }}</td>
+                </tr>
+                <tr>
+                    <th>Guest Name</th>
+                    <td>{{ booking.full_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ booking.email }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ booking.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Hotel</th>
+                    <td>{{ hotel.Hotel_Name }}</td>
+                </tr>
+                <tr>
+                    <th>Check-in</th>
+                    <td>{{ booking.check_in_date }}</td>
+                </tr>
+                <tr>
+                    <th>Check-out</th>
+                    <td>{{ booking.check_out_date }}</td>
+                </tr>
+                <tr>
+                    <th>No. of Rooms</th>
+                    <td>{{ booking.room_quantity }}</td>
+                </tr>
+                <tr>
+                    <th>Total Price</th>
+                    <td>₹ {{ booking.total_price }}</td>
+                </tr>
+                {% if booking.room_number %}
+                <tr>
+                    <th>Allocated Room No.</th>
+                    <td>{{ booking.room_number }}</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <h2>Hotel Information</h2>
+            <table>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ hotel.Hotel_Address }}</td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td>
+                        Phone: {{ booking.admin_contact_number }}<br>
+                        Email: {{ booking.admin_email }}
+                    </td>
+                </tr>
+                {% if booking.location_url %}
+                <tr>
+                    <th>Map Location</th>
+                    <td><a href="{{ booking.location_url }}" class="map-link">{{ booking.location_url }}</a></td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Timings</th>
+                    <td>Check-in: 3:00 PM &nbsp; | &nbsp; Check-out: 11:00 AM</td>
+                </tr>
+            </table>
+
+            <div class="footer">
+                <div class="tc-title">Terms & Conditions</div>
+                <ul class="tc">
+                    <li>Please present this confirmation during check-in.</li>
+                    <li>Government-issued ID is mandatory for all guests.</li>
+                    <li>Check-in and check-out times are strict unless approved by the hotel.</li>
+                    <li>Cancellation or modifications are subject to hotel policy.</li>
+                    <li>This confirmation is valid only for the booking ID mentioned above.</li>
+                </ul>
+
+                <div class="signature">
+                    Warm regards,<br>
+                    <strong>The {{ hotel.Hotel_Name }} Team</strong>
+                </div>
+                <div style="margin-top:12px;">
+                    © {% now "Y" %} {{ hotel.Hotel_Name }}. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

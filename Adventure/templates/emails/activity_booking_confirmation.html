@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed - {{ activity.Name }}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    .email-container {
+      max-width: 650px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+      padding: 40px 20px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+    }
+
+    .confirmation-badge {
+      background: rgba(255, 255, 255, 0.15);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      font-weight: bold;
+      box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .header p {
+      margin: 8px 0 0;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 35px;
+    }
+
+    .content p {
+      margin: 0 0 15px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .booking-card {
+      background: #f9fafe;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 25px 0;
+      border: 1px solid #e6ecf5;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    }
+
+    .booking-detail {
+      display: flex;
+      margin-bottom: 12px;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      width: 130px;
+      color: #185a9d;
+    }
+
+    .detail-value {
+      flex: 1;
+      color: #444;
+    }
+
+    .services-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .services-list li {
+      background: #e1f5fe;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #0277bd;
+      box-shadow: 0 2px 6px rgba(2,119,189,0.15);
+    }
+
+    .button-group {
+      text-align: center;
+      margin: 30px 0 10px;
+    }
+
+    .button-group a {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      margin: 6px;
+    }
+
+    .download-button {
+      background: #1976d2;
+      color: #fff !important;
+    }
+
+    .download-button:hover {
+      background: #0d47a1;
+    }
+
+    .location-button {
+      background: #ff9800;
+      color: #fff !important;
+    }
+
+    .location-button:hover {
+      background: #e65100;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: #43cea2;
+      color: white !important;
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-weight: 500;
+      margin-top: 12px;
+      transition: all 0.25s ease;
+    }
+
+    .action-button:hover {
+      background: #2c7f67;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin: 25px 0 12px;
+      color: #185a9d;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e6ecf5;
+      margin: 30px 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: #f1f4f9;
+      color: #777;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <div class="confirmation-badge">✓</div>
+      <h1>Booking Confirmed!</h1>
+      <p>We’re excited to host you at {{ activity.Name }}</p>
+    </div>
+
+    <div class="content">
+      <p>Hi <strong>{{ booking.full_name }}</strong>,</p>
+      <p>Your booking for <strong>{{ activity.Name }}</strong> has been successfully confirmed. Here are your details:</p>
+
+      <div class="booking-card">
+        <div class="booking-detail">
+          <span class="detail-label">Booking ID:</span>
+          <span class="detail-value">{{ booking.booking_id }}</span>
+        </div>
+        <div class="booking-detail">
+          <span class="detail-label">Activity:</span>
+          <span class="detail-value">{{ activity.Name }}</span>
+        </div>
+        <div class="booking-detail">
+          <span class="detail-label">Date:</span>
+          <span class="detail-value">{{ booking.booking_date }}</span>
+        </div>
+        <div class="booking-detail">
+          <span class="detail-label">Participants:</span>
+          <span class="detail-value">{{ booking.quantity }}</span>
+        </div>
+        <div class="booking-detail">
+          <span class="detail-label">Total Price:</span>
+          <span class="detail-value">₹{{ booking.total_price }}</span>
+        </div>
+
+        {% if booking.get_services %}
+        <div class="booking-detail">
+          <span class="detail-label">Services:</span>
+          <div class="detail-value">
+            <ul class="services-list">
+              {% for service in booking.get_services %}
+              <li>{{ service }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="button-group">
+        <a href="{{ pdf_url }}" class="download-button">📄 Download PDF</a>
+        {% if booking.location_url %}
+        <a href="{{ booking.location_url }}" class="location-button">📍 View Location</a>
+        {% endif %}
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>What to Bring</h3>
+      <ul>
+        <li>Booking confirmation (email or PDF)</li>
+        <li>Valid ID proof</li>
+        <li>Comfortable clothing</li>
+        <li>Any personal medications</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <h3>Need Help?</h3>
+      <p>If you have any questions or requests, reach out to our team:</p>
+      <a href="mailto:{{ booking.admin_email }}" class="action-button">Contact Support</a>
+    </div>
+
+    <div class="footer">
+      <p>We look forward to welcoming you 🎉</p>
+      <p>© {% now "Y" %} {{ activity.Name }}. All rights reserved.</p>
+      <p>{{ booking.admin_contact_number }} | {{ booking.admin_email }}</p>
+    </div>
+  </div>
+</body>
+</html>

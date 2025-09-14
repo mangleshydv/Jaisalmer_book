@@ -1,0 +1,15 @@
+Booking Cancelled
+
+Dear {{ booking.full_name }},
+
+We regret to inform you that your booking for the activity "{{ booking.activity.Name }}" 
+on {{ booking.booking_date }} has been cancelled.
+
+Booking ID: {{ booking.booking_id }}
+Total Price: ₹{{ booking.total_price }}
+
+For assistance, contact:
+Admin Email: {{ booking.admin_email }}
+Admin Contact: {{ booking.admin_contact_number }}
+
+Thank you for choosing us.

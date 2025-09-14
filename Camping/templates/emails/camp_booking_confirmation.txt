@@ -1,0 +1,25 @@
+# camping/templates/emails/camp_booking_confirmation.txt
+Booking Confirmation - {{ camp.Name }}
+
+Dear {{ booking.full_name }},
+
+Thank you for booking with us! Here are your booking details:
+
+Booking ID: {{ booking.booking_id }}
+Camp: {{ camp.Name }}
+Check-in: {{ booking.check_in_date }}
+Check-out: {{ booking.check_out_date }}
+Number of Tents: {{ booking.quantity }}
+Total Price: ₹{{ booking.total_price }}
+
+{% if booking.pickup_home %}• Pickup From Home (₹{{ camp.Pickup_Home_Price }}){% endif %}
+{% if booking.pickup_hotel %}• Pickup From Hotel (₹{{ camp.Pickup_Hotel_Price }}){% endif %}
+{% if booking.pickup_railway %}• Pickup From Railway Station (₹{{ camp.Pickup_Railway_Station_Price }}){% endif %}
+{% if booking.pickup_airport %}• Pickup From Airport (₹{{ camp.Pickup_Airport_Price }}){% endif %}
+
+For any questions, please contact us at {{ booking.admin_contact_number }} or reply to this email.
+
+We look forward to hosting you!
+
+Best regards,
+{{ site_name }} Team

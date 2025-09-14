@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmation - {{ hotel.Hotel_Name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf8f3;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: #fffdf9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border: 2px solid #d4af37; /* golden border */
+        }
+        .header {
+            background: linear-gradient(135deg, #3b2d1f, #6b4c2a);
+            color: #f9e8c9;
+            text-align: center;
+            padding: 35px 20px;
+            position: relative;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #d4af37;
+            border-radius: 2px;
+        }
+        .content {
+            padding: 35px 30px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .content p {
+            margin: 15px 0;
+        }
+        .details {
+            margin: 30px 0;
+            background: #fff9ef;
+            padding: 20px;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+        }
+        .details h3 {
+            margin-top: 0;
+            color: #6b4c2a;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .details ul {
+            padding: 0;
+            list-style: none;
+            margin: 15px 0 0 0;
+        }
+        .details li {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        .details strong {
+            color: #3b2d1f;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #d4af37;
+            color: #3b2d1f;
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+        .btn:hover {
+            background-color: #c19e2c;
+            color: #fff;
+        }
+        .hotel-info {
+            margin-top: 30px;
+            font-size: 15px;
+            color: #444;
+            border-top: 1px solid #eee3d3;
+            padding-top: 25px;
+        }
+        .hotel-info h3 {
+            color: #3b2d1f;
+            margin-bottom: 12px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .hotel-info a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+        .footer {
+            text-align: center;
+            font-size: 13px;
+            color: #6b5e4b;
+            padding: 20px;
+            background-color: #faf4eb;
+            border-top: 1px solid #eee3d3;
+        }
+        @media screen and (max-width: 600px) {
+            .content, .details {
+                padding: 20px 15px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>Booking Confirmation</h1>
+        </div>
+
+        <div class="content">
+            <p>Dear {{ booking.full_name }},</p>
+
+            <p>It is our privilege to welcome you to <strong>{{ hotel.Hotel_Name }}</strong>. Your booking has been successfully confirmed, and we are delighted to prepare a royal experience for you.</p>
+
+            <div class="details">
+                <h3>Booking Summary</h3>
+                <ul>
+                    <li><strong>Confirmation Number:</strong> {{ booking.booking_id }}</li>
+                    <li><strong>Check-in Date:</strong> {{ booking.check_in_date }}</li>
+                    <li><strong>Check-out Date:</strong> {{ booking.check_out_date }}</li>
+                    <li><strong>Room Type:</strong> {{ booking.room_type|default:"Luxury Suite" }}</li>
+                    <li><strong>Number of Rooms:</strong> {{ booking.room_quantity }}</li>
+                    <li><strong>Total Amount:</strong> ₹{{ booking.total_price }} (incl. taxes)</li>
+                </ul>
+                <a href="{{ hotel.website_url|default:'#' }}" class="btn">Visit Hotel Website</a>
+            </div>
+
+            <p>Please find your booking confirmation attached as a PDF. Kindly present this at the time of check-in.</p>
+
+            <div class="hotel-info">
+                <h3>Hotel Information</h3>
+                <p>
+                    <strong>{{ hotel.Hotel_Name }}</strong><br>
+                    {{ hotel.Hotel_Address }}<br>
+                    {% if hotel.address_line2 %}{{ hotel.address_line2 }}<br>{% endif %}
+                    {{ hotel.city }}, {{ hotel.state }} {{ hotel.zip_code }}<br>
+                    {{ hotel.country }}<br><br>
+                    Phone: {{ booking.admin_contact_number }}<br>
+                    Email: {{ booking.admin_email }}<br>
+                    Location: <a href="{{ booking.location_url }}">{{ booking.location_url }}</a>
+                </p>
+                <p>
+                    <strong>Check-in:</strong> 3:00 PM &nbsp; | &nbsp;
+                    <strong>Check-out:</strong> 11:00 AM
+                </p>
+            </div>
+
+            <p>For modifications or cancellations, please contact our reservations team directly. We look forward to providing you with an unforgettable stay.</p>
+
+            <p>Warm regards,<br>
+            <strong>The {{ hotel.Hotel_Name }} Team</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>© {% now "Y" %} {{ hotel.Hotel_Name }}. All rights reserved.</p>
+        </div>
+
+    </div>
+</body>
+</html>

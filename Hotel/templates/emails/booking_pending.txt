@@ -1,0 +1,20 @@
+Dear {{ booking.full_name }},
+
+Thank you for your booking at {{ hotel.Hotel_Name }}!
+
+Your booking (ID: {{ booking.booking_id }}) is currently being processed.
+
+Booking Details:
+- Check-in: {{ booking.check_in_date }}
+- Check-out: {{ booking.check_out_date }}
+- Room Quantity: {{ booking.room_quantity }}
+- Total Price: ₹{{ booking.total_price }}
+
+We will review your booking and send you a confirmation shortly. Please note that your booking is not yet confirmed.
+
+If you have any questions, please contact us at {{ hotel.contact_email }} or {{ hotel.contact_phone }}.
+
+Thank you for choosing {{ hotel.Hotel_Name }}!
+
+Best regards,
+{{ hotel.Hotel_Name }} Team

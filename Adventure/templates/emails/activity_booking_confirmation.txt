@@ -1,0 +1,39 @@
+Booking Confirmed - {{ activity.Name }}
+===============================
+
+Dear {{ booking.full_name }},
+
+Your booking for {{ activity.Name }} has been successfully confirmed!
+
+Booking Details:
+---------------
+Booking ID: {{ booking.booking_id }}
+Activity: {{ activity.Name }}
+Date: {{ booking.booking_date }}
+Participants: {{ booking.quantity }}
+Total Price: ₹{{ booking.total_price }}
+
+{% if booking.get_services %}
+Services:
+{% for service in booking.get_services %}
+- {{ service }}
+{% endfor %}
+{% endif %}
+
+Download your confirmation: {{ pdf_url }}
+{% if booking.location_url %}View location: {{ booking.location_url }}{% endif %}
+
+What to Bring:
+- Confirmation email or PDF
+- Valid ID proof
+- Comfortable clothing
+- Any personal medications
+
+Need Help?
+Contact our support team:
+Email: {{ booking.admin_email }}
+Phone: {{ booking.admin_contact_number }}
+
+We look forward to seeing you!
+
+© {% now "Y" %} {{ activity.Name }}. All rights reserved.
