@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-07$9=@-w12z97!j9v5am(59__c$py=$w4s_l(k!&!t(s#9p+ss'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['flyvoo.in','www.flyvoo.in','93.127.199.244']
 
 
 # Application definition
