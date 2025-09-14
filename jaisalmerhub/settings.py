@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'jaisalmerbook_db',
-        'USER': 'django_user'@'localhost',
+        'USER': 'django_user',
         'PASSWORD': 'brizz1998',
         'HOST': 'localhost',
         'PORT': '3306',
