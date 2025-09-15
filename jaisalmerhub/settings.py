@@ -27,7 +27,13 @@ SECRET_KEY = 'django-insecure-07$9=@-w12z97!j9v5am(59__c$py=$w4s_l(k!&!t(s#9p+ss
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['flyvoo.in','www.flyvoo.in','93.127.199.244']
+ALLOWED_HOSTS = [
+    'flyvoo.in',
+    'www.flyvoo.in',
+    '93.127.199.244',
+    'localhost',
+    '127.0.0.1'
+]
 
 
 # Application definition
