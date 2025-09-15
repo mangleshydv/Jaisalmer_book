@@ -105,7 +105,6 @@ JAZZMIN_SETTINGS = {
     "search_model": ["auth.User"],
 
     # === Logo Settings ===
-    "site_logo": "assets/image/banner-img/fy.png",         # admin sidebar me lagega
     "site_logo_classes": "img-square",      # shape (optional: img-square, img-circle)
     "site_icon": "images/favicon.png",      # browser tab icon (favicon)
 }
