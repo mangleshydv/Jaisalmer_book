@@ -231,10 +231,10 @@
       </a>
       
       <div class="hidden md:flex space-x-8">
-        <a href="#" class="nav-link text-royal-blue hover:text-deep-gold transition">Home</a>
-        <a href="#" class="nav-link text-royal-blue hover:text-deep-gold transition">Hotels</a>
-        <a href="#" class="nav-link text-royal-blue hover:text-deep-gold transition">Camps</a>
-        <a href="#" class="nav-link text-royal-blue hover:text-deep-gold transition">Adventures</a>
+        <a href="{% url 'home' %}" class="nav-link text-royal-blue hover:text-deep-gold transition">Home</a>
+        <a href="{% url 'hotel' %}" class="nav-link text-royal-blue hover:text-deep-gold transition">Hotels</a>
+        <a href="{% url 'camp_list' %}" class="nav-link text-royal-blue hover:text-deep-gold transition">Camps</a>
+        <a href="{% url 'adventure' %}" class="nav-link text-royal-blue hover:text-deep-gold transition">Adventures</a>
         <a href="#" class="nav-link text-deep-gold font-medium">Privacy</a>
       </div>
       
@@ -407,7 +407,7 @@
                   <i class="fas fa-envelope text-royal-gold text-xl"></i>
                 </div>
                 <a href="mailto:info@flyvoo.com" class="text-royal-blue font-semibold hover:text-deep-gold transition">
-                  info@flyvoo.com
+                  infflyvoo.com
                 </a>
               </div>
               
