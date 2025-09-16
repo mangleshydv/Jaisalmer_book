@@ -141,7 +141,8 @@ DEFAULT_FROM_EMAIL = 'brizzyadav29@gmail.com'  # your email
 ADMIN_EMAIL = 'brizzyadav29@gmail.com'  # admin notification email
 
 
-
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800   # 50 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
 
 
 
