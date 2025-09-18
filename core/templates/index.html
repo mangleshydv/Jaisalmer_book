@@ -879,7 +879,7 @@
                     <div class="col-lg-4 col-md-6">
                       <div class="package-card-two">
                         <div class="package-card-img-wrap">
-                          <a href="package-details.html" class="card-img" style="height: 300px;"><img src="{{ camp.Main_Image.url }}" alt="{{ camp.Name }}" /></a>
+                          <a href="{% url 'camp_detail' camp.slug %}" class="card-img" style="height: 300px;"><img src="{{ camp.Main_Image.url }}" alt="{{ camp.Name }}" /></a>
 
                           <div class="gallery-option">
                             <a href="#" class="icon">
@@ -970,7 +970,7 @@
                     <div class="col-lg-4 col-md-6">
                       <div class="experience-card">
                         <div class="package-card-img-wrap">
-                          <a href="package-details.html" class="card-img" style="height: 300px;"><img src="{{ hotel.Hotel_Main_img.url }}" alt="{{ hotel.Hotel_Name }}" /></a>
+                          <a href="{% url 'hotel_detail' hotel.slug %}" class="card-img" style="height: 300px;"><img src="{{ hotel.Hotel_Main_img.url }}" alt="{{ hotel.Hotel_Name }}" /></a>
                           <div class="batch">
                             <span class="featured">{{ hotel.Stars }}</span>
                           </div>
@@ -1022,7 +1022,7 @@
                     <div class="col-lg-4 col-md-6">
                       <div class="activity-card-four">
                         <div class="activity-card-img-wrap">
-                          <a href="package-details.html" class="card-img"><img src="{{ act.Image.url }}" alt="{{ act.Name }}" /></a>
+                          <a href="{% url 'activity_detail' act.slug %}" class="card-img"><img src="{{ act.Image.url }}" alt="{{ act.Name }}" /></a>
                           <a class="batch"><span class="featured">{{ act.Features }}</span></a>
                         </div>
                         <div class="activity-card-content">
