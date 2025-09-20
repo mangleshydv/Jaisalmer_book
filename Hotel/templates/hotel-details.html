@@ -129,84 +129,46 @@
       <div class="container">
         <div class="row gy-md-5">
           <div class="col-lg-8">
-            {% if hotel_img %}
-              <div class="hotel-details-area">
-                <div class="tab-content" id="myTab5Content">
-                  <div class="tab-pane fade show active" id="city-one" role="tabpanel" aria-labelledby="city-one">
-                    <div class="package-img">
-                      {% if hotel_img.image1 %}
-                        <img src="{{ hotel_img.image1.url }}" alt="{{ hotel.Hotel_Name }}" />
-                      {% endif %}
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="city-two" role="tabpanel" aria-labelledby="city-two">
-                    <div class="package-img">
-                      {% if hotel_img.image2 %}
-                        <img src="{{ hotel_img.image2.url }}" alt="{{ hotel.Hotel_Name }}" />
-                      {% endif %}
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="city-three" role="tabpanel" aria-labelledby="city-three">
-                    <div class="package-img">
-                      {% if hotel_img.image3 %}
-                        <img src="{{ hotel_img.image3.url }}" alt=" {{ hotel.Hotel_Name }}" />
-                      {% endif %}
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="city-four" role="tabpanel" aria-labelledby="city-four">
-                    <div class="package-img">
-                      {% if hotel_img.image4 %}
-                        <img src="{{ hotel_img.image4.url }}" alt="{{ hotel.Hotel_Name }}" />
-                      {% endif %}
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="city-five" role="tabpanel" aria-labelledby="city-five">
-                    <div class="package-img">
-                      {% if hotel_img.image5 %}
-                        <img src="{{ hotel_img.image5.url }}" alt="{{ hotel.Hotel_Name }}" />
-                      {% endif %}
-                    </div>
-                  </div>
+            {% if hotel.images.all %}
+              <div id="hotelCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicators -->
+                <div class="carousel-indicators">
+                  {% for img in hotel.images.all %}
+                    <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+                  {% endfor %}
                 </div>
 
-                <ul class="nav nav-tabs" id="myTab5" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button style="width:160px; height:123px; padding:0;" class="nav-link active" id="city-one-Tab" data-bs-toggle="tab" data-bs-target="#city-one" type="button" role="tab" aria-controls="city-one" aria-selected="true">
-                      {% if hotel_img.image1 %}
-                        <img src="{{ hotel_img.image1.url }}" alt="{{ hotel.Hotel_Name }}" width="160" height="123" style="object-fit: cover;" />
-                      {% endif %}
-                    </button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button style="width:160px; height:123px; padding:0;" class="nav-link" id="city-two-Tab" data-bs-toggle="tab" data-bs-target="#city-two" type="button" role="tab" aria-controls="city-two" aria-selected="false">
-                      {% if hotel_img.image2 %}
-                        <img src="{{ hotel_img.image2.url }}" alt="{{ hotel.Hotel_Name }}" width="160" height="123" style="object-fit: cover;" />
-                      {% endif %}
-                    </button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button style="width:160px; height:123px; padding:0;" class="nav-link" id="city-three-Tab" data-bs-toggle="tab" data-bs-target="#city-three" type="button" role="tab" aria-controls="city-three" aria-selected="false">
-                      {% if hotel_img.image3 %}
-                        <img src="{{ hotel_img.image3.url }}" alt="{{ hotel.Hotel_Name }}" width="160" height="123" style="object-fit: cover;" />
-                      {% endif %}
-                    </button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button style="width:160px; height:123px; padding:0;" class="nav-link" id="city-four-Tab" data-bs-toggle="tab" data-bs-target="#city-four" type="button" role="tab" aria-controls="city-four" aria-selected="false">
-                      {% if hotel_img.image4 %}
-                        <img src="{{ hotel_img.image4.url }}" alt="{{ hotel.Hotel_Name }}" width="160" height="123" style="object-fit: cover;" />
-                      {% endif %}
-                    </button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button style="width:160px; height:123px; padding:0;" class="nav-link" id="city-five-Tab" data-bs-toggle="tab" data-bs-target="#city-five" type="button" role="tab" aria-controls="city-five" aria-selected="false">
-                      {% if hotel_img.image5 %}
-                        <img src="{{ hotel_img.image5.url }}" alt="{{ hotel.Hotel_Name }}" width="160" height="123" style="object-fit: cover;" />
-                      {% endif %}
-                    </button>
-                  </li>
-                </ul>
+                <!-- Slides -->
+                <div class="carousel-inner">
+                  {% for img in hotel.images.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                      <img src="{{ img.image.url }}" class="d-block w-100" alt="{{ hotel.Hotel_Name }}" style="object-fit:cover; height:400px;" />
+                    </div>
+                  {% endfor %}
+                </div>
+
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
               </div>
+
+              <!-- Counter -->
+              <div class="text-center mt-2">
+                <span id="currentSlide">1</span> /
+                <span id="totalSlides">{{ hotel.images.count }}</span>
+              </div>
+
+              <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let carouselElement = document.querySelector("#hotelCarousel");
+    let totalSlides = {{ hotel.images.count }};
+    let currentSlide = document.querySelector("#currentSlide");
+
+    carouselElement.addEventListener("slid.bs.carousel", function (event) {
+      currentSlide.textContent = event.to + 1;  // index + 1
+    });
+  });
+</script>
             {% else %}
               <p>No images available.</p>
             {% endif %}
