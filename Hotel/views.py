@@ -28,7 +28,7 @@ def hotel_detail_view(request, slug):
     hotel = get_object_or_404(Hotel, slug=slug)
     
     try:
-        hotel_img = HotelImage.objects.get(hotel=hotel)
+        hotel_img = HotelImage.objects.filter(hotel=hotel)
     except HotelImage.DoesNotExist:
         hotel_img = None
 
