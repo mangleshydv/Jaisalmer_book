@@ -44,15 +44,11 @@ class Hotel(models.Model):
 
 
 class HotelImage(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='images')
-    image1 = models.ImageField(upload_to='Hotel_imgs/', blank=True, null=True)
-    image2 = models.ImageField(upload_to='Hotel_imgs/', blank=True, null=True)
-    image3 = models.ImageField(upload_to='Hotel_imgs/', blank=True, null=True)
-    image4 = models.ImageField(upload_to='Hotel_imgs/', blank=True, null=True)
-    image5 = models.ImageField(upload_to='Hotel_imgs/', blank=True, null=True)
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to="Hotel_imgs/")
 
     def __str__(self):
-        return f"Images of {self.hotel.Hotel_Name}"
+        return f"Image of {self.hotel.Hotel_Name}"
 
 
 class HotelAmenity(models.Model):
